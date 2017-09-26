@@ -1,0 +1,40 @@
+---
+layout: default
+---
+
+{% assign first_post = site.posts.first %}
+<div class="content">
+  <div class="group">
+    <h4>{{ first_post.date | date_to_string }}</h4>
+  </div>
+  <div class="post-content">
+    {{ first_post.content }}
+    <p>Interested in getting exclusive deals and events in your inbox? <a href="{{site.mail_url}}">Click here</a> to subscribe.</p>
+    <p>Here’s a list of what’s happening today.</p>    
+  </div>
+  {% assign post_date = first_post.date | date: "%Y-%m-%d" %}
+  {% for event in site.data[post_date] %}
+    <div class="group">
+      <h4>{{ event.time }}</h4>
+      <div class="event">
+        <h2>{{ event.title }}</h2>
+        <p class="address">{{ event.address }} (<a href="{{ event.mapurl }}">Get Directions</a>)</p>      
+        <p class="body">{{ event.body }}</p>       
+      </div>
+    </div>   
+  {% endfor %}
+  {% if first_post.previous.url or first_post.next.url %}
+  <div class="group pagination">
+    {% if first_post.previous.url %}
+      <a class="prev" href="{{first_post.previous.url}}">Previous Post</a>
+    {% else %}
+      <a class="prev disabled">Previous Post</a>
+    {% endif %}
+    {% if first_post.next.url %}
+      <a class="next" href="{{first_post.next.url}}">Next Post</a>
+    {% else %}
+      <a class="next disabled">Next Post</a>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
