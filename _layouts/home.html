@@ -17,7 +17,7 @@ layout: default
     <div class="group">
       <h4>{{ event.time }}</h4>
       <div class="event">
-        <h2>{{ event.title }}</h2>
+        <h2>{% if event.link %} <a href="{{event.link}}">{{ event.title }}</a> {% else %} {{event.title}} {% endif %}</h2>
         <p class="address">{{ event.address }} (<a href="{{ event.mapurl }}">Get Directions</a>)</p>      
         <p class="body">{{ event.body }}</p>       
       </div>
